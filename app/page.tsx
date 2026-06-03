@@ -25,6 +25,7 @@ export default function App() {
   const [lang, setLang] = useState<LangCode>("en");
   const [view, setView] = useState<View>("lang");
   const [ready, setReady] = useState(false);
+  const [forceMobile, setForceMobile] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("bridge_lang") as LangCode | null;
@@ -51,9 +52,9 @@ export default function App() {
   const langInfo = LANGUAGES.find((l) => l.code === lang)!;
 
   return (
-    <div className="min-h-screen bg-[#f0f2f5] flex">
-      {/* ── PC 사이드바 (md 이상에서만 표시) ── */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#1a1a2e] min-h-screen sticky top-0 flex-shrink-0">
+    <div className={`min-h-screen bg-[#f0f2f5] flex ${forceMobile ? "force-mobile" : ""}`}>
+      {/* ── PC 사이드바 (md 이상 + 모바일 강제 아닐 때만 표시) ── */}
+      <aside className={`${forceMobile ? "hidden" : "hidden md:flex"} flex-col w-64 bg-[#1a1a2e] min-h-screen sticky top-0 flex-shrink-0`}>
         {/* Logo */}
         <div className="px-6 pt-8 pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
@@ -95,6 +96,16 @@ export default function App() {
             <span className="text-xl">{langInfo.flag}</span>
             <span className="text-sm font-semibold">{langInfo.native}</span>
           </button>
+          {/* 모바일 뷰 전환 버튼 */}
+          <button
+            onClick={() => setForceMobile(!forceMobile)}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/8 hover:text-white transition-all"
+          >
+            <span className="text-xl">📱</span>
+            <span className="text-sm font-semibold">
+              {forceMobile ? "PC 뷰로 전환" : "모바일 뷰로 전환"}
+            </span>
+          </button>
           <a
             href="tel:112"
             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#e63946] text-white font-bold text-sm"
@@ -106,7 +117,7 @@ export default function App() {
 
       {/* ── 메인 콘텐츠 ── */}
       <main className="flex-1 min-w-0">
-        <div className="w-full">
+        <div className={forceMobile ? "max-w-md mx-auto" : "w-full"}>
           {view === "home"       && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} />}
           {view === "safety"     && <SafetyView lang={lang} nav={nav} />}
           {view === "medical"    && <MedicalView lang={lang} nav={nav} />}
