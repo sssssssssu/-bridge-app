@@ -118,7 +118,7 @@ export default function App() {
       {/* ── 메인 콘텐츠 ── */}
       <main className="flex-1 min-w-0">
         <div className={forceMobile ? "max-w-md mx-auto" : "w-full"}>
-          {view === "home"       && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} />}
+          {view === "home"       && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} forceMobile={forceMobile} onToggleView={() => setForceMobile(!forceMobile)} />}
           {view === "safety"     && <SafetyView lang={lang} nav={nav} />}
           {view === "medical"    && <MedicalView lang={lang} nav={nav} />}
           {view === "labor"      && <LaborView lang={lang} nav={nav} />}

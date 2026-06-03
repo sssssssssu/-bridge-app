@@ -6,6 +6,8 @@ interface Props {
   lang: LangCode;
   nav: (v: View) => void;
   onChangeLang: () => void;
+  forceMobile?: boolean;
+  onToggleView?: () => void;
 }
 
 const CATEGORIES = [
@@ -21,7 +23,7 @@ const EMERGENCY = [
   { number: "119", label: "callFire",   color: "#e63946", icon: "🚑" },
 ];
 
-export default function HomeView({ lang, nav, onChangeLang }: Props) {
+export default function HomeView({ lang, nav, onChangeLang, forceMobile, onToggleView }: Props) {
   const langInfo = LANGUAGES.find((l) => l.code === lang)!;
 
   return (
@@ -36,13 +38,24 @@ export default function HomeView({ lang, nav, onChangeLang }: Props) {
               <p className="text-white/50 text-xs">브릿지 · 안산</p>
             </div>
           </div>
-          <button
-            onClick={onChangeLang}
-            className="flex items-center gap-2 bg-white/10 rounded-full px-3 py-2 text-white/80 text-sm font-medium"
-          >
-            <span>{langInfo.flag}</span>
-            <span>{langInfo.native}</span>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* 모바일에서 PC뷰 전환 버튼 */}
+            {onToggleView && (
+              <button
+                onClick={onToggleView}
+                className="md:hidden flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-2 text-white/80 text-sm font-medium"
+              >
+                <span>{forceMobile ? "🖥️" : "📱"}</span>
+              </button>
+            )}
+            <button
+              onClick={onChangeLang}
+              className="flex items-center gap-2 bg-white/10 rounded-full px-3 py-2 text-white/80 text-sm font-medium"
+            >
+              <span>{langInfo.flag}</span>
+              <span>{langInfo.native}</span>
+            </button>
+          </div>
         </div>
 
         {/* Emergency quick dial */}
