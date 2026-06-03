@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:\\\\Users\\\\josh4\\\\Desktop\\\\app\\\\.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(Get-Process -Name \"node\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
