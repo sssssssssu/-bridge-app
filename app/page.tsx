@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { LANGUAGES, type LangCode, t } from "@/lib/translations";
+import { ViewContext } from "@/lib/viewContext";
 import HomeView from "@/components/HomeView";
 import SafetyView from "@/components/SafetyView";
 import MedicalView from "@/components/MedicalView";
@@ -52,9 +53,10 @@ export default function App() {
   const langInfo = LANGUAGES.find((l) => l.code === lang)!;
 
   return (
-    <div className={`min-h-screen bg-[#f0f2f5] flex ${forceMobile ? "force-mobile" : ""}`}>
+    <ViewContext.Provider value={{ forceMobile, setForceMobile }}>
+    <div className="min-h-screen bg-[#f0f2f5] flex">
       {/* ── PC 사이드바 (md 이상 + 모바일 강제 아닐 때만 표시) ── */}
-      <aside className={`${forceMobile ? "hidden" : "hidden md:flex"} flex-col w-64 bg-[#1a1a2e] min-h-screen sticky top-0 flex-shrink-0`}>
+      <aside className={`${forceMobile ? "hidden" : "hidden md:flex"} flex-col w-64 bg-[#1a1a2e] min-h-screen sticky top-0 flex-shrink-0 z-10`}>
         {/* Logo */}
         <div className="px-6 pt-8 pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
@@ -117,7 +119,7 @@ export default function App() {
 
       {/* ── 메인 콘텐츠 ── */}
       <main className="flex-1 min-w-0">
-        <div className={forceMobile ? "max-w-md mx-auto" : "w-full"}>
+        <div className={forceMobile ? "max-w-md mx-auto w-full" : "w-full"}>
           {view === "home"       && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} forceMobile={forceMobile} onToggleView={() => setForceMobile(!forceMobile)} />}
           {view === "safety"     && <SafetyView lang={lang} nav={nav} />}
           {view === "medical"    && <MedicalView lang={lang} nav={nav} />}
@@ -128,6 +130,7 @@ export default function App() {
         </div>
       </main>
     </div>
+    </ViewContext.Provider>
   );
 }
 

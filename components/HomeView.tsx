@@ -1,6 +1,7 @@
 "use client";
 import { type View } from "@/app/page";
 import { type LangCode, t, LANGUAGES } from "@/lib/translations";
+import { useViewMode } from "@/lib/viewContext";
 
 interface Props {
   lang: LangCode;
@@ -23,7 +24,8 @@ const EMERGENCY = [
   { number: "119", label: "callFire",   color: "#e63946", icon: "🚑" },
 ];
 
-export default function HomeView({ lang, nav, onChangeLang, forceMobile, onToggleView }: Props) {
+export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Props) {
+  const { forceMobile } = useViewMode();
   const langInfo = LANGUAGES.find((l) => l.code === lang)!;
 
   return (
@@ -41,11 +43,13 @@ export default function HomeView({ lang, nav, onChangeLang, forceMobile, onToggl
           <div className="flex items-center gap-2">
             {/* 모바일에서 PC뷰 전환 버튼 */}
             {onToggleView && (
+              // PC 뷰(사이드바 있음)일 때는 숨김, 모바일이거나 forceMobile일 때 표시
               <button
                 onClick={onToggleView}
-                className="md:hidden flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-2 text-white/80 text-sm font-medium"
+                title={forceMobile ? "PC 뷰로 전환" : "PC 뷰로 전환"}
+                className={`${!forceMobile ? "md:hidden" : ""} flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-2 text-white/80 text-sm font-medium`}
               >
-                <span>{forceMobile ? "🖥️" : "📱"}</span>
+                <span>🖥️</span>
               </button>
             )}
             <button
