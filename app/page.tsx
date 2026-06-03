@@ -11,6 +11,16 @@ import ChatView from "@/components/ChatView";
 
 export type View = "lang" | "home" | "safety" | "medical" | "labor" | "legal" | "industrial" | "chat";
 
+const NAV_ITEMS: { id: View; icon: string; labelKey: string; color: string }[] = [
+  { id: "home",       icon: "🏠", labelKey: "home",       color: "#1a1a2e" },
+  { id: "safety",     icon: "🔴", labelKey: "safety",     color: "#e63946" },
+  { id: "medical",    icon: "🏥", labelKey: "medical",    color: "#0e9f6e" },
+  { id: "labor",      icon: "💼", labelKey: "labor",      color: "#ff5a1f" },
+  { id: "legal",      icon: "⚖️", labelKey: "legal",      color: "#6875f5" },
+  { id: "industrial", icon: "🏗️", labelKey: "industrial", color: "#ff8900" },
+  { id: "chat",       icon: "🤖", labelKey: "chat",       color: "#6875f5" },
+];
+
 export default function App() {
   const [lang, setLang] = useState<LangCode>("en");
   const [view, setView] = useState<View>("lang");
@@ -38,23 +48,81 @@ export default function App() {
   }
 
   const nav = (v: View) => setView(v);
+  const langInfo = LANGUAGES.find((l) => l.code === lang)!;
 
   return (
-    <div className="min-h-screen bg-[#f0f2f5] flex flex-col max-w-md mx-auto relative">
-      {view === "home" && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} />}
-      {view === "safety" && <SafetyView lang={lang} nav={nav} />}
-      {view === "medical" && <MedicalView lang={lang} nav={nav} />}
-      {view === "labor" && <LaborView lang={lang} nav={nav} />}
-      {view === "legal" && <LegalView lang={lang} nav={nav} />}
-      {view === "industrial" && <IndustrialView lang={lang} nav={nav} />}
-      {view === "chat" && <ChatView lang={lang} nav={nav} />}
+    <div className="min-h-screen bg-[#f0f2f5] flex">
+      {/* ── PC 사이드바 (md 이상에서만 표시) ── */}
+      <aside className="hidden md:flex flex-col w-64 bg-[#1a1a2e] min-h-screen sticky top-0 flex-shrink-0">
+        {/* Logo */}
+        <div className="px-6 pt-8 pb-6 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-xl">🌉</div>
+            <div>
+              <h1 className="text-white text-xl font-black tracking-tight leading-none">BRIDGE</h1>
+              <p className="text-white/40 text-xs">브릿지 · 안산</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Nav items */}
+        <nav className="flex-1 px-3 py-4 space-y-1">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => nav(item.id)}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
+                view === item.id
+                  ? "bg-white/15 text-white font-bold"
+                  : "text-white/60 hover:bg-white/8 hover:text-white"
+              }`}
+            >
+              <span className="text-xl w-7 text-center">{item.icon}</span>
+              <span className="text-sm font-semibold">{t(item.labelKey, lang)}</span>
+              {view === item.id && (
+                <div className="ml-auto w-1.5 h-6 rounded-full" style={{ backgroundColor: item.color }} />
+              )}
+            </button>
+          ))}
+        </nav>
+
+        {/* Language & emergency */}
+        <div className="px-3 pb-6 space-y-2 border-t border-white/10 pt-4">
+          <button
+            onClick={() => setView("lang")}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/8 hover:text-white transition-all"
+          >
+            <span className="text-xl">{langInfo.flag}</span>
+            <span className="text-sm font-semibold">{langInfo.native}</span>
+          </button>
+          <a
+            href="tel:112"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#e63946] text-white font-bold text-sm"
+          >
+            🚨 {t("emergency", lang)} 112
+          </a>
+        </div>
+      </aside>
+
+      {/* ── 메인 콘텐츠 ── */}
+      <main className="flex-1 min-w-0">
+        <div className="w-full">
+          {view === "home"       && <HomeView lang={lang} nav={nav} onChangeLang={() => setView("lang")} />}
+          {view === "safety"     && <SafetyView lang={lang} nav={nav} />}
+          {view === "medical"    && <MedicalView lang={lang} nav={nav} />}
+          {view === "labor"      && <LaborView lang={lang} nav={nav} />}
+          {view === "legal"      && <LegalView lang={lang} nav={nav} />}
+          {view === "industrial" && <IndustrialView lang={lang} nav={nav} />}
+          {view === "chat"       && <ChatView lang={lang} nav={nav} />}
+        </div>
+      </main>
     </div>
   );
 }
 
 function LangSelect({ onSelect }: { onSelect: (c: LangCode) => void }) {
   return (
-    <div className="min-h-screen bg-[#1a1a2e] flex flex-col items-center justify-center p-6 max-w-md mx-auto">
+    <div className="min-h-screen bg-[#1a1a2e] flex flex-col items-center justify-center p-6 max-w-lg mx-auto">
       <div className="mb-8 text-center">
         <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center mx-auto mb-4 text-4xl">
           🌉

@@ -16,9 +16,10 @@ export default function PageLayout({ title, icon, color, lang, nav, children }: 
     <div className="min-h-screen flex flex-col bg-[#f0f2f5]">
       <div className="sticky top-0 z-30 px-4 pt-4 pb-3" style={{ background: color }}>
         <div className="flex items-center gap-3">
+          {/* 모바일에서만 뒤로가기 버튼 표시 */}
           <button
             onClick={() => nav("home")}
-            className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-xl flex-shrink-0"
+            className="md:hidden w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-xl flex-shrink-0"
           >
             ←
           </button>
@@ -29,9 +30,10 @@ export default function PageLayout({ title, icon, color, lang, nav, children }: 
         </div>
       </div>
 
+      {/* 모바일에서만 긴급 플로팅 버튼 */}
       <a
         href="tel:112"
-        className="fixed bottom-6 right-4 z-50 bg-[#e63946] text-white rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 font-bold text-sm"
+        className="md:hidden fixed bottom-6 right-4 z-50 bg-[#e63946] text-white rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 font-bold text-sm"
         style={{ boxShadow: "0 4px 24px rgba(230,57,70,0.5)" }}
       >
         <span className="text-base">🚨</span>
