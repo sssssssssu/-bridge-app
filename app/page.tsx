@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { LANGUAGES, type LangCode, t } from "@/lib/translations";
 import { ViewContext } from "@/lib/viewContext";
+import { BridgeLogo } from "@/components/Icons";
+import LangPicker from "@/components/LangPicker";
 import HomeView from "@/components/HomeView";
 import SafetyView from "@/components/SafetyView";
 import MedicalView from "@/components/MedicalView";
@@ -60,59 +62,55 @@ export default function App() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center max-w-md mx-auto"
         style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)" }}>
-        <div className="flex flex-col items-center gap-4">
-          {/* B 로고 */}
-          <div className="w-24 h-24 relative">
-            <div className="w-full h-full rounded-3xl flex items-center justify-center"
-              style={{ background: "rgba(255,255,255,0.25)", backdropFilter: "blur(10px)" }}>
-              <span className="text-white text-5xl font-black" style={{ fontStyle: "italic" }}>B</span>
-            </div>
-            {/* 말풍선 꼬리 */}
-            <div className="absolute -bottom-2 left-4 w-4 h-4 rounded-full"
-              style={{ background: "rgba(255,255,255,0.25)" }} />
-          </div>
+        <div className="flex flex-col items-center gap-5">
+          <BridgeLogo size={100} />
           <h1 className="text-white text-4xl font-black tracking-widest">BRIDGE</h1>
         </div>
       </div>
     );
   }
 
-  // 언어 선택
+  // 언어 선택 (3D 드럼롤 피커)
   if (view === "lang") {
-    return (
-      <div className="min-h-screen bg-white flex flex-col max-w-md mx-auto">
-        <div className="flex-1 px-6 pt-12 pb-4">
-          <p className="text-2xl font-bold text-gray-900 leading-snug mb-8">
-            <span style={{ color: "#6C6EF0" }}>○○○</span>
-            {lang === "ko" ? "님, 환영해요!\n사용할 언어를 선택해주세요." :
-             lang === "en" ? ", Welcome!\nPlease select the language you would like to use." :
-             "님, 환영해요!\n사용할 언어를 선택해주세요."}
-          </p>
+    const greeting =
+      lang === "ko" ? "사용할 언어를\n선택해주세요." :
+      lang === "en" ? "Please select\nyour language." :
+      lang === "zh" ? "请选择您的语言。" :
+      lang === "vi" ? "Vui lòng chọn\nngôn ngữ của bạn." :
+      lang === "ru" ? "Пожалуйста, выберите\nваш язык." :
+      lang === "mn" ? "Хэлээ\nсонгоно уу." :
+      "사용할 언어를\n선택해주세요.";
 
-          <div className="space-y-3">
-            {LANGUAGES.map((l) => (
-              <button
-                key={l.code}
-                onClick={() => selectLang(l.code)}
-                className="w-full py-3.5 rounded-full text-base font-semibold transition-all"
-                style={{
-                  backgroundColor: lang === l.code ? "#6C6EF0" : "#EBEBFF",
-                  color: lang === l.code ? "#fff" : "#6C6EF0",
-                }}
-              >
-                {l.native}
-              </button>
-            ))}
+    return (
+      <div className="min-h-screen flex flex-col max-w-md mx-auto bg-white">
+        {/* 상단 헤더 */}
+        <div className="px-6 pt-14 pb-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
+              style={{ background: "linear-gradient(135deg, #7B7DF5, #5B5EE8)" }}>
+              <span className="text-white text-2xl font-black italic">B</span>
+            </div>
+            <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
+          <p className="text-2xl font-bold text-gray-900 leading-snug whitespace-pre-line">
+            <span style={{ color: "#6C6EF0" }}>○○○</span>님, 환영해요!{"\n"}
+            {greeting}
+          </p>
         </div>
 
-        <div className="px-6 pb-10">
-          <button
-            onClick={startApp}
-            className="w-full py-4 rounded-full text-white font-bold text-lg flex items-center justify-center gap-2"
-            style={{ backgroundColor: "#6C6EF0" }}
-          >
-            {lang === "ko" ? "시작하기" : lang === "en" ? "Get Started" : "시작하기"}
+        {/* 3D 드럼롤 피커 */}
+        <div className="flex-1 px-6 flex flex-col justify-center">
+          <LangPicker value={lang} onChange={selectLang} />
+        </div>
+
+        {/* 시작하기 버튼 */}
+        <div className="px-6 pb-12 pt-4">
+          <button onClick={startApp}
+            className="w-full py-4 rounded-full text-white font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
+            style={{ backgroundColor: "#6C6EF0", boxShadow: "0 8px 24px rgba(108,110,240,0.35)" }}>
+            {lang === "ko" ? "시작하기" : lang === "en" ? "Get Started" :
+             lang === "zh" ? "开始" : lang === "vi" ? "Bắt đầu" :
+             lang === "ru" ? "Начать" : "시작하기"}
             <span className="text-xl">›</span>
           </button>
         </div>

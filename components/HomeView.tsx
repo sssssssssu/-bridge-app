@@ -2,6 +2,7 @@
 import { type View } from "@/app/page";
 import { type LangCode, t } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
+import { GhostIcon, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
 
 interface Props {
   lang: LangCode;
@@ -13,35 +14,35 @@ interface Props {
 const CATEGORIES = [
   {
     id: "safety" as View,
-    icon: "⚠️",
+    Icon: SafetyIcon,
     labelKey: "safety",
     desc_ko: "미리 안전 사고를\n예방하고 대응해요.",
     desc_en: "Prevent and respond\nto safety accidents.",
   },
   {
     id: "medical" as View,
-    icon: "➕",
+    Icon: MedicalIcon,
     labelKey: "medical",
     desc_ko: "병원, 응급 정보를\n제공해요.",
     desc_en: "Provides hospital\nand emergency info.",
   },
   {
     id: "labor" as View,
-    icon: "💼",
+    Icon: LaborIcon,
     labelKey: "labor",
     desc_ko: "근로자의 권리 정보를\n제공해요.",
     desc_en: "Provides worker\nrights information.",
   },
   {
     id: "legal" as View,
-    icon: "🏆",
+    Icon: LegalIcon,
     labelKey: "legal",
     desc_ko: "법률과 관련해\n상담하고 지원해요.",
     desc_en: "Consult and support\nlegal matters.",
   },
   {
     id: "industrial" as View,
-    icon: "📦",
+    Icon: IndustrialIcon,
     labelKey: "industrial",
     desc_ko: "산재 신청 및 보상에\n대한 정보를 제공해요.",
     desc_en: "Info on industrial\naccident claims.",
@@ -79,8 +80,8 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
 
         {/* 마스코트 + 타이틀 */}
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-4xl flex-shrink-0">
-            👻
+          <div className="w-16 h-16 flex-shrink-0">
+            <GhostIcon size={64} />
           </div>
           <div>
             <h1 className="text-white text-xl font-black leading-tight">
@@ -113,10 +114,10 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
         <div className="grid grid-cols-2 gap-3">
           {CATEGORIES.map((cat) => (
             <button key={cat.id} onClick={() => nav(cat.id)}
-              className="bg-white rounded-2xl p-4 text-left shadow-sm active:scale-95 transition-all flex flex-col gap-2">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+              className="bg-white rounded-2xl p-4 text-left shadow-sm active:scale-95 transition-all flex flex-col gap-3">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center"
                 style={{ background: "#EBEBFF" }}>
-                {cat.icon}
+                <cat.Icon size={26} />
               </div>
               <div>
                 <div className="font-bold text-gray-900 text-base">{t(cat.labelKey, lang)}</div>
@@ -130,8 +131,8 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
           {/* 안산 센터 */}
           <a href="tel:1644-7111"
             className="bg-white rounded-2xl p-4 text-left shadow-sm active:scale-95 transition-all flex flex-col gap-2">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-              style={{ background: "#EBEBFF" }}>🏢</div>
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center"
+              style={{ background: "#EBEBFF" }}><AnsanIcon size={26} /></div>
             <div>
               <div className="font-bold text-gray-900 text-sm leading-tight">
                 {isKo ? "안산 외국인\n지원센터" : "Ansan\nSupport Center"}
@@ -146,7 +147,7 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
       <button onClick={() => nav("chat")}
         className="fixed bottom-6 right-4 z-50 rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-2"
         style={{ backgroundColor: "#6C6EF0", boxShadow: "0 8px 32px rgba(108,110,240,0.4)" }}>
-        <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center text-lg">👻</div>
+        <div className="w-9 h-9 flex-shrink-0"><GhostIcon size={36} /></div>
         <div className="text-left">
           <div className="text-white font-bold text-xs">{t("chat", lang)}</div>
           <div className="text-white/70 text-xs">
