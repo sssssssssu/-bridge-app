@@ -84,7 +84,7 @@ export default function App() {
           <div className="flex items-center gap-3 mb-6">
             <div style={{ background: "#6C6EF0", borderRadius: 14, width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center", padding: 6, flexShrink: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={32} height={32} style={{ objectFit: "contain" }} />
+              <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={18} height={18} style={{ objectFit: "contain" }} />
             </div>
             <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
