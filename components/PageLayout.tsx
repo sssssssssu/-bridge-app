@@ -5,7 +5,7 @@ import { useViewMode } from "@/lib/viewContext";
 
 interface Props {
   title: string;
-  icon: string;
+  icon: React.ReactNode;
   color: string;
   lang: LangCode;
   nav: (v: View) => void;

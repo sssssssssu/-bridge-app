@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t } from "@/lib/translations";
 import { LEGAL_SITUATIONS, LEGAL_CONTACTS } from "@/lib/viewTranslations";
 import PageLayout, { Card, CallButton, ExternalLink, SectionTitle } from "./PageLayout";
+import { LegalIcon } from "./Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
@@ -11,7 +12,7 @@ export default function LegalView({ lang, nav }: Props) {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <PageLayout title={t("legal", lang)} icon="⚖️" color="#6875f5" lang={lang} nav={nav}>
+    <PageLayout title={t("legal", lang)} icon={<LegalIcon size={24} />} color="#6875f5" lang={lang} nav={nav}>
       <SectionTitle>{t("legalGuide", lang)}</SectionTitle>
       {LEGAL_SITUATIONS.map((s) => (
         <Card key={s.id} className="!p-0 overflow-hidden">

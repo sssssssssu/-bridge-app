@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t } from "@/lib/translations";
 import { INDUSTRIAL_DEFINITION, INDUSTRIAL_STEPS, HAZARDS, INDUSTRIAL_CONTACTS } from "@/lib/viewTranslations";
 import PageLayout, { Card, CallButton, SectionTitle } from "./PageLayout";
+import { IndustrialIcon } from "./Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
@@ -12,7 +13,7 @@ export default function IndustrialView({ lang, nav }: Props) {
   const steps = INDUSTRIAL_STEPS[lang] ?? INDUSTRIAL_STEPS.en ?? [];
 
   return (
-    <PageLayout title={t("industrial", lang)} icon="🏗️" color="#ff8900" lang={lang} nav={nav}>
+    <PageLayout title={t("industrial", lang)} icon={<IndustrialIcon size={24} />} color="#ff8900" lang={lang} nav={nav}>
       <Card className="bg-[#fff8ef] border border-[#ff8900]/20 !p-4">
         <p className="text-sm text-[#1a1a2e] font-medium leading-relaxed">
           {INDUSTRIAL_DEFINITION[lang]}

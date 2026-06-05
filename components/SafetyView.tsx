@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t, getEmergencyPhrase } from "@/lib/translations";
 import { SAFETY_GUIDE_TITLE, FIRE_GUIDE, QUAKE_GUIDE, SITE_LANG_NOTE } from "@/lib/viewTranslations";
 import PageLayout, { Card, CallButton, ExternalLink, SectionTitle } from "./PageLayout";
+import { SafetyIcon } from "./Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
@@ -44,7 +45,7 @@ export default function SafetyView({ lang, nav }: Props) {
   }
 
   return (
-    <PageLayout title={t("safety", lang)} icon="🔴" color="#e63946" lang={lang} nav={nav}>
+    <PageLayout title={t("safety", lang)} icon={<SafetyIcon size={24} />} color="#e63946" lang={lang} nav={nav}>
       <SectionTitle>{lang === "ko" ? "긴급 신고" : t("emergency", lang)}</SectionTitle>
       <Card>
         <div className="space-y-2">

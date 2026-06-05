@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t } from "@/lib/translations";
 import { LABOR_UI, LABOR_LAWS_TRANSLATED } from "@/lib/viewTranslations";
 import PageLayout, { Card, CallButton, ExternalLink, SectionTitle } from "./PageLayout";
+import { LaborIcon } from "./Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
@@ -47,7 +48,7 @@ export default function LaborView({ lang, nav }: Props) {
   const DAY_UNIT = lang === "ko" ? "일" : "d";
 
   return (
-    <PageLayout title={t("labor", lang)} icon="💼" color="#ff5a1f" lang={lang} nav={nav}>
+    <PageLayout title={t("labor", lang)} icon={<LaborIcon size={24} />} color="#ff5a1f" lang={lang} nav={nav}>
       <SectionTitle>{t("wageCalc", lang)}</SectionTitle>
 
       {/* Min wage banner */}

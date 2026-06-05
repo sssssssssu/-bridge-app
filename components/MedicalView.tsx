@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t } from "@/lib/translations";
 import { SHOW_DOCTOR, FOREIGN_PATIENT_CENTER, ANSAN_SUPPORT, SYMPTOMS, HIRA_LABEL, EGEN_LABEL, HIRA_CALL, NHIS_LABEL } from "@/lib/viewTranslations";
 import PageLayout, { Card, CallButton, ExternalLink, SectionTitle } from "./PageLayout";
+import { MedicalIcon } from "./Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
@@ -24,7 +25,7 @@ export default function MedicalView({ lang, nav }: Props) {
   }
 
   return (
-    <PageLayout title={t("medical", lang)} icon="🏥" color="#0e9f6e" lang={lang} nav={nav}>
+    <PageLayout title={t("medical", lang)} icon={<MedicalIcon size={24} />} color="#0e9f6e" lang={lang} nav={nav}>
       <SectionTitle>{t("medicalInterpreter", lang)}</SectionTitle>
       <Card>
         <div className="space-y-2">
