@@ -2,6 +2,24 @@ import type { LangCode } from "./translations";
 
 type T14 = Record<LangCode, string>;
 
+// BBB코리아 무료통역 서비스 레이블
+export const BBB_LABEL: T14 = {
+  ko: "BBB코리아 무료통역 서비스",
+  en: "BBB Korea Free Interpretation",
+  zh: "BBB韩国免费翻译服务",
+  vi: "Dịch vụ phiên dịch miễn phí BBB Korea",
+  mn: "BBB Солонгос үнэгүй орчуулга",
+  id: "Layanan Interpretasi Gratis BBB Korea",
+  ms: "Perkhidmatan Terjemahan Percuma BBB Korea",
+  ru: "Бесплатный перевод BBB Korea",
+  uz: "BBB Korea bepul tarjimon xizmati",
+  th: "บริการล่ามฟรี BBB Korea",
+  fil: "Libreng Interpretasyon ng BBB Korea",
+  si: "BBB Korea නොමිලේ පරිවර්තන සේවාව",
+  km: "សេវាបកប្រែឥតគិតថ្លៃ BBB Korea",
+  ne: "BBB Korea निःशुल्क व्याख्या सेवा",
+};
+
 // ────────────────────────────────────────────────
 // SAFETY VIEW
 // ────────────────────────────────────────────────

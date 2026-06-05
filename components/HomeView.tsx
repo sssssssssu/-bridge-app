@@ -3,6 +3,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t, SERVICE_DESC, SELECT_SERVICE, TO_PC_VIEW } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
 import { GhostIcon, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
+import { BBB_LABEL } from "@/lib/viewTranslations";
 
 interface Props {
   lang: LangCode;
@@ -145,6 +146,20 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
               </div>
               <div className="text-gray-400 text-xs mt-1">1644-7111</div>
             </div>
+          </a>
+
+          {/* BBB코리아 무료통역 */}
+          <a href="tel:1588-5644"
+            className="col-span-2 bg-white rounded-2xl p-4 shadow-sm flex items-center gap-4 border border-[#6C6EF0]/20 active:scale-95 transition-all">
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+              style={{ background: "#EBEBFF" }}>🌐</div>
+            <div className="flex-1 min-w-0">
+              <div className="font-bold text-sm leading-tight" style={{ color: "#6C6EF0" }}>
+                {BBB_LABEL[lang]}
+              </div>
+              <div className="text-gray-400 text-xs font-mono mt-0.5">1588-5644</div>
+            </div>
+            <div className="text-2xl">📞</div>
           </a>
         </div>
       </div>

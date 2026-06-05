@@ -51,7 +51,6 @@ export default function SafetyView({ lang, nav }: Props) {
         <div className="space-y-2">
           <CallButton number="112" label={t("callPolice", lang)} color="#1a56db" />
           <CallButton number="119" label={t("callFire", lang)} color="#e63946" />
-          <CallButton number="1588-0112" label={t("multilingualPolice", lang)} color="#6875f5" />
         </div>
       </Card>
 

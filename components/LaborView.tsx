@@ -187,7 +187,7 @@ export default function LaborView({ lang, nav }: Props) {
       <Card>
         <div className="space-y-2">
           <CallButton number="1350" label={LABOR_UI.wageTheftCall[lang] ?? LABOR_UI.wageTheftCall.en ?? ""} color="#ff5a1f" />
-          <CallButton number="031-412-0000" label={LABOR_UI.ansanLaborOffice[lang] ?? LABOR_UI.ansanLaborOffice.en ?? ""} color="#ff5a1f" />
+          <CallButton number="031-412-1992" label={LABOR_UI.ansanLaborOffice[lang] ?? LABOR_UI.ansanLaborOffice.en ?? ""} color="#ff5a1f" />
           <CallButton number="1644-7111" label={LABOR_UI.moel[lang] !== undefined ? (lang === "ko" ? "안산시외국인주민상담지원센터" : "Ansan Foreign Residents Support") : "Ansan Support"} color="#057a55" />
           <ExternalLink url="https://labor.moel.go.kr/minwonApply/minwonFormat.do?searchVal=SN001"
             label={LABOR_UI.moel[lang] ?? LABOR_UI.moel.en ?? ""} lang={lang} icon="💻" hint="chrome" />

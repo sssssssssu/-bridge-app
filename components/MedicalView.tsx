@@ -29,7 +29,7 @@ export default function MedicalView({ lang, nav }: Props) {
       <SectionTitle>{t("medicalInterpreter", lang)}</SectionTitle>
       <Card>
         <div className="space-y-2">
-          <CallButton number="1588-5700" label={FOREIGN_PATIENT_CENTER[lang]} color="#0e9f6e" />
+          <CallButton number="119" label={t("callFire", lang)} color="#e63946" />
           <CallButton number="1644-7111" label={ANSAN_SUPPORT[lang]} color="#057a55" />
         </div>
       </Card>
