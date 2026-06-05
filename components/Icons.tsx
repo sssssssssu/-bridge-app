@@ -99,10 +99,10 @@ export function BridgeLogo({ size = 80 }: { size?: number }) {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="/bridge-logo.png"
-      alt="BRIDGE logo"
+      alt="BRIDGE"
       width={size}
       height={size}
-      style={{ objectFit: "contain" }}
+      style={{ width: size, height: size, objectFit: "contain", display: "block" }}
     />
   );
 }

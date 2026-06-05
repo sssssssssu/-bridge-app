@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { type View } from "@/app/page";
 import { type LangCode, t, LANGUAGES } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
+import { CHAT_QUICK } from "@/lib/viewTranslations";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 interface Message { role: "user" | "assistant"; content: string; }
@@ -76,11 +77,11 @@ export default function ChatView({ lang, nav }: Props) {
       <div className="flex-1 px-4 pt-4 pb-4 space-y-4 overflow-y-auto">
         {messages.length === 0 && (
           <div className="space-y-2 pt-2">
-            {QUICK.map((q, i) => (
-              <button key={i} onClick={() => setInput(lang === "ko" ? q.ko : q.en)}
+            {(CHAT_QUICK[lang] ?? CHAT_QUICK.en ?? []).map((q, i) => (
+              <button key={i} onClick={() => setInput(q)}
                 className="w-full text-left bg-white rounded-2xl px-4 py-3 text-sm font-medium shadow-sm active:scale-95 transition-all"
                 style={{ color: "#6C6EF0" }}>
-                {lang === "ko" ? q.ko : q.en}
+                {q}
               </button>
             ))}
           </div>
