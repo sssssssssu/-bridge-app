@@ -64,7 +64,9 @@ export default function App() {
       <div className="min-h-screen flex flex-col items-center justify-center max-w-md mx-auto"
         style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)" }}>
         <div className="flex flex-col items-center gap-6">
-          <BridgeLogoSplash size={110} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={130} height={130}
+            style={{ objectFit: "contain", display: "block" }} />
           <h1 className="text-white text-4xl font-black tracking-widest" style={{ letterSpacing: "0.15em" }}>BRIDGE</h1>
         </div>
       </div>
@@ -80,8 +82,10 @@ export default function App() {
         {/* 상단 헤더 */}
         <div className="px-6 pt-12 pb-4">
           <div className="flex items-center gap-3 mb-6">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={44} height={44} style={{ objectFit: "contain" }} />
+            <div style={{ background: "#6C6EF0", borderRadius: 14, width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center", padding: 6, flexShrink: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={32} height={32} style={{ objectFit: "contain" }} />
+            </div>
             <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 leading-snug whitespace-pre-line">
@@ -114,7 +118,10 @@ export default function App() {
           {/* Logo */}
           <div className="px-6 pt-8 pb-6 border-b border-gray-100">
             <div className="flex items-center gap-3">
-              <BridgeLogo size={40} />
+              <div style={{ background: "#6C6EF0", borderRadius: 12, width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", padding: 5, flexShrink: 0 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={30} height={30} style={{ objectFit: "contain" }} />
+              </div>
               <div>
                 <h1 className="text-gray-900 text-xl font-black tracking-tight leading-none">BRIDGE</h1>
                 <p className="text-gray-400 text-xs">브릿지 · 안산</p>
