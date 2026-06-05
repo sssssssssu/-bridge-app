@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { LANGUAGES, type LangCode } from "@/lib/translations";
 
 interface Props {
@@ -7,129 +7,132 @@ interface Props {
   onChange: (code: LangCode) => void;
 }
 
-const ITEM_HEIGHT = 52;
-const VISIBLE = 5; // 보이는 개수 (홀수)
-const HALF = Math.floor(VISIBLE / 2);
+const ITEM_H = 52;
+const VISIBLE = 5;
 
 export default function LangPicker({ value, onChange }: Props) {
   const langs = LANGUAGES;
-  const currentIdx = langs.findIndex((l) => l.code === value);
-  const [offset, setOffset] = useState(currentIdx * ITEM_HEIGHT);
-  const startY = useRef(0);
-  const startOffset = useRef(0);
-  const isDragging = useRef(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const isScrolling = useRef(false);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function clamp(val: number) {
-    return Math.max(0, Math.min((langs.length - 1) * ITEM_HEIGHT, val));
+  // 현재 선택 인덱스 → 스크롤 위치 계산
+  function idxToScrollTop(idx: number) {
+    return idx * ITEM_H;
   }
 
-  function snapToNearest(rawOffset: number) {
-    const snapped = Math.round(rawOffset / ITEM_HEIGHT) * ITEM_HEIGHT;
-    const clamped = clamp(snapped);
-    setOffset(clamped);
-    const idx = Math.round(clamped / ITEM_HEIGHT);
-    onChange(langs[idx].code);
+  // 스크롤 위치 → 인덱스
+  function scrollTopToIdx(scrollTop: number) {
+    return Math.round(scrollTop / ITEM_H);
   }
 
-  function onPointerDown(e: React.PointerEvent) {
-    isDragging.current = true;
-    startY.current = e.clientY;
-    startOffset.current = offset;
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  }
-
-  function onPointerMove(e: React.PointerEvent) {
-    if (!isDragging.current) return;
-    const delta = startY.current - e.clientY;
-    setOffset(clamp(startOffset.current + delta));
-  }
-
-  function onPointerUp(e: React.PointerEvent) {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const delta = startY.current - e.clientY;
-    snapToNearest(startOffset.current + delta);
-  }
-
-  function onWheel(e: React.WheelEvent) {
-    e.preventDefault();
-    snapToNearest(clamp(offset + e.deltaY));
-  }
-
-  // sync when value changes externally
+  // 외부에서 value 바뀌면 스크롤 이동
   useEffect(() => {
-    const idx = langs.findIndex((l) => l.code === value);
-    if (idx >= 0) setOffset(idx * ITEM_HEIGHT);
-  }, [value]);
+    const el = listRef.current;
+    if (!el) return;
+    const idx = langs.findIndex(l => l.code === value);
+    if (idx < 0) return;
+    el.scrollTo({ top: idxToScrollTop(idx), behavior: "smooth" });
+  }, [value, langs]);
 
-  const selectedIdx = Math.round(offset / ITEM_HEIGHT);
+  const handleScroll = useCallback(() => {
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    isScrolling.current = true;
+
+    scrollTimer.current = setTimeout(() => {
+      const el = listRef.current;
+      if (!el) return;
+      isScrolling.current = false;
+
+      const idx = Math.max(0, Math.min(langs.length - 1, scrollTopToIdx(el.scrollTop)));
+      // 딱 맞게 스냅
+      el.scrollTo({ top: idxToScrollTop(idx), behavior: "smooth" });
+      onChange(langs[idx].code);
+    }, 80);
+  }, [langs, onChange]);
+
+  // 초기 위치 세팅
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    const idx = langs.findIndex(l => l.code === value);
+    if (idx >= 0) el.scrollTop = idxToScrollTop(idx);
+  }, []); // eslint-disable-line
 
   return (
-    <div className="relative w-full select-none" style={{ height: ITEM_HEIGHT * VISIBLE }}>
-      {/* 선택 하이라이트 */}
+    <div className="relative w-full select-none" style={{ height: ITEM_H * VISIBLE }}>
+
+      {/* 선택 하이라이트 바 */}
       <div className="absolute left-0 right-0 pointer-events-none z-10 rounded-2xl"
         style={{
-          top: HALF * ITEM_HEIGHT,
-          height: ITEM_HEIGHT,
+          top: Math.floor(VISIBLE / 2) * ITEM_H,
+          height: ITEM_H,
           backgroundColor: "#6C6EF0",
-          borderRadius: 16,
         }}
       />
 
-      {/* 위아래 페이드 오버레이 */}
+      {/* 위 아래 페이드 */}
       <div className="absolute inset-0 pointer-events-none z-20" style={{
-        background: "linear-gradient(to bottom, white 0%, transparent 35%, transparent 65%, white 100%)"
+        background: "linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 28%, transparent 42%, transparent 58%, rgba(255,255,255,0.4) 72%, rgba(255,255,255,0.95) 100%)"
       }} />
 
-      {/* 드래그 영역 */}
+      {/* 스크롤 컨테이너 */}
       <div
-        ref={containerRef}
-        className="absolute inset-0 z-30 overflow-hidden cursor-grab active:cursor-grabbing"
-        style={{ perspective: 800 }}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-        onWheel={onWheel}
+        ref={listRef}
+        onScroll={handleScroll}
+        className="absolute inset-0 z-30 overflow-y-scroll"
+        style={{
+          scrollSnapType: "y mandatory",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
       >
-        <div
-          className="absolute left-0 right-0"
-          style={{
-            top: HALF * ITEM_HEIGHT - offset,
-            transition: isDragging.current ? "none" : "top 0.25s cubic-bezier(0.25,0.46,0.45,0.94)",
-          }}
-        >
-          {langs.map((lang, i) => {
-            const dist = i - selectedIdx;
-            const absDist = Math.abs(dist);
-            const rotateX = dist * -18; // 3D 기울기
-            const opacity = absDist === 0 ? 1 : absDist === 1 ? 0.5 : absDist === 2 ? 0.2 : 0;
-            const scale = absDist === 0 ? 1 : absDist === 1 ? 0.9 : 0.8;
-            const isSelected = i === selectedIdx;
+        {/* 위 패딩 (선택 영역 가운데 정렬용) */}
+        <div style={{ height: Math.floor(VISIBLE / 2) * ITEM_H }} />
 
-            return (
-              <div
-                key={lang.code}
-                onClick={() => snapToNearest(i * ITEM_HEIGHT)}
-                className="flex items-center justify-center gap-3 font-semibold text-base"
-                style={{
-                  height: ITEM_HEIGHT,
-                  transform: `rotateX(${rotateX}deg) scale(${scale})`,
-                  transformOrigin: "center center",
-                  opacity,
-                  color: isSelected ? "white" : "#6C6EF0",
-                  transition: "transform 0.15s, opacity 0.15s",
-                  cursor: "pointer",
-                }}
-              >
-                <span className="text-xl">{lang.flag}</span>
-                <span>{lang.native}</span>
-              </div>
-            );
-          })}
-        </div>
+        {langs.map((lang, i) => {
+          const isSelected = lang.code === value;
+          return (
+            <div
+              key={lang.code}
+              style={{
+                height: ITEM_H,
+                scrollSnapAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 10,
+                cursor: "pointer",
+                transition: "opacity 0.15s, transform 0.15s",
+              }}
+              onClick={() => {
+                const el = listRef.current;
+                if (el) el.scrollTo({ top: idxToScrollTop(i), behavior: "smooth" });
+                onChange(lang.code);
+              }}
+            >
+              <span style={{ fontSize: 20 }}>{lang.flag}</span>
+              <span style={{
+                fontSize: 16,
+                fontWeight: isSelected ? 700 : 500,
+                color: isSelected ? "white" : "#6C6EF0",
+                transition: "color 0.15s, font-weight 0.15s",
+              }}>
+                {lang.native}
+              </span>
+            </div>
+          );
+        })}
+
+        {/* 아래 패딩 */}
+        <div style={{ height: Math.floor(VISIBLE / 2) * ITEM_H }} />
       </div>
+
+      {/* 스크롤바 숨기기 */}
+      <style>{`
+        div::-webkit-scrollbar { display: none; }
+      `}</style>
     </div>
   );
 }
