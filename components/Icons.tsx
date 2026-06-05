@@ -94,7 +94,26 @@ export function AnsanIcon({ size = 28 }: { size?: number }) {
   );
 }
 
-export function BridgeLogo({ size = 80 }: { size?: number }) {
+// 사이드바/헤더용 - 보라 둥근 B 아이콘
+export function BridgeLogo({ size = 40 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      <defs>
+        <linearGradient id="bridgeBg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#8B8DF8" />
+          <stop offset="100%" stopColor="#5B5EE8" />
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="12" fill="url(#bridgeBg)" />
+      <text x="20" y="28" textAnchor="middle" fill="white"
+        fontSize="22" fontWeight="900" fontFamily="Arial Black, Arial, sans-serif"
+        fontStyle="italic">B</text>
+    </svg>
+  );
+}
+
+// 스플래시 전용 - 실제 이미지 파일
+export function BridgeLogoSplash({ size = 110 }: { size?: number }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -104,5 +123,37 @@ export function BridgeLogo({ size = 80 }: { size?: number }) {
       height={size}
       style={{ width: size, height: size, objectFit: "contain", display: "block" }}
     />
+  );
+}
+
+// 홈 헤더용 - 배경 없는 흰색 B 누끼 (파란 그라데이션 배경 위에 올림)
+export function BridgeLogoWhite({ size = 64 }: { size?: number }) {
+  return (
+    <svg width={size} height={size * 1.15} viewBox="0 0 80 92" fill="none">
+      {/* 말풍선 B 외곽 - 순수 흰색, 투명 배경 */}
+      <path
+        d="M14 5
+           L50 5
+           Q66 5 66 21
+           Q66 30 55 35
+           Q68 40 68 54
+           Q68 72 50 72
+           L14 72
+           Q8 72 8 66
+           L8 12
+           Q8 5 14 5 Z"
+        fill="white"
+        fillOpacity="0.92"
+      />
+      {/* 말풍선 꼬리 */}
+      <circle cx="14" cy="80" r="5" fill="white" fillOpacity="0.75" />
+      <circle cx="10" cy="89" r="3" fill="white" fillOpacity="0.5" />
+      {/* B 위 구멍 */}
+      <path d="M22 17 L46 17 Q56 17 56 26 Q56 35 46 35 L22 35 Z"
+        fill="#6C6EF0" fillOpacity="0.2" />
+      {/* B 아래 구멍 */}
+      <path d="M22 40 L48 40 Q60 40 60 52 Q60 64 48 64 L22 64 Z"
+        fill="#6C6EF0" fillOpacity="0.2" />
+    </svg>
   );
 }

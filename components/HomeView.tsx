@@ -2,7 +2,7 @@
 import { type View } from "@/app/page";
 import { type LangCode, t, SERVICE_DESC, SELECT_SERVICE, TO_PC_VIEW } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
-import { GhostIcon, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
+import { BridgeLogoWhite, BridgeLogo, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
 
 interface Props {
   lang: LangCode;
@@ -91,8 +91,8 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
 
         {/* 마스코트 + 타이틀 */}
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 flex-shrink-0">
-            <GhostIcon size={64} />
+          <div className="flex-shrink-0">
+            <BridgeLogoWhite size={60} />
           </div>
           <div>
             <h1 className="text-white text-xl font-black leading-tight whitespace-pre-line">
@@ -153,7 +153,7 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
       <button onClick={() => nav("chat")}
         className="fixed bottom-6 right-4 z-50 rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-2"
         style={{ backgroundColor: "#6C6EF0", boxShadow: "0 8px 32px rgba(108,110,240,0.4)" }}>
-        <div className="w-9 h-9 flex-shrink-0"><GhostIcon size={36} /></div>
+        <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"><BridgeLogo size={36} /></div>
         <div className="text-left">
           <div className="text-white font-bold text-xs">{CHAT_LABEL[lang] ?? "AI Chat"}</div>
           <div className="text-white/70 text-xs whitespace-pre-line">

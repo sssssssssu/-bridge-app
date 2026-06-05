@@ -4,6 +4,7 @@ import { type View } from "@/app/page";
 import { type LangCode, t, LANGUAGES } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
 import { CHAT_QUICK } from "@/lib/viewTranslations";
+import { BridgeLogo, BridgeLogoWhite } from "@/components/Icons";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 interface Message { role: "user" | "assistant"; content: string; }
@@ -58,7 +59,7 @@ export default function ChatView({ lang, nav }: Props) {
             className={`${!forceMobile ? "md:hidden" : ""} w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-bold flex-shrink-0`}>
             ‹
           </button>
-          <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0">👻</div>
+          <div className="w-10 h-10 flex-shrink-0"><BridgeLogoWhite size={40} /></div>
           <div>
             <h1 className="text-white text-base font-black leading-none">{t("chat", lang)}</h1>
             <p className="text-white/60 text-xs">
@@ -90,7 +91,7 @@ export default function ChatView({ lang, nav }: Props) {
         {messages.map((m, i) => (
           <div key={i} className={`flex items-end gap-2 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             {m.role === "assistant" && (
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-base flex-shrink-0 shadow-sm">👻</div>
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden"><BridgeLogo size={32} /></div>
             )}
             <div className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
               m.role === "user"

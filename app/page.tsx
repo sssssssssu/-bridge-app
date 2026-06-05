@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { LANGUAGES, type LangCode, t, TO_MOBILE_VIEW, TO_PC_VIEW } from "@/lib/translations";
 import { ViewContext } from "@/lib/viewContext";
-import { BridgeLogo } from "@/components/Icons";
+import { BridgeLogo, BridgeLogoSplash } from "@/components/Icons";
 import LangPicker from "@/components/LangPicker";
 import { GREETINGS, START_BTN } from "@/lib/translations";
 import HomeView from "@/components/HomeView";
@@ -64,7 +64,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col items-center justify-center max-w-md mx-auto"
         style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)" }}>
         <div className="flex flex-col items-center gap-6">
-          <BridgeLogo size={110} />
+          <BridgeLogoSplash size={110} />
           <h1 className="text-white text-4xl font-black tracking-widest" style={{ letterSpacing: "0.15em" }}>BRIDGE</h1>
         </div>
       </div>
@@ -80,9 +80,7 @@ export default function App() {
         {/* 상단 헤더 */}
         <div className="px-6 pt-12 pb-4">
           <div className="flex items-center gap-3 mb-6">
-            <div style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)", borderRadius: 16, padding: 8 }}>
-              <BridgeLogo size={40} />
-            </div>
+            <BridgeLogo size={44} />
             <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 leading-snug whitespace-pre-line">
@@ -115,8 +113,7 @@ export default function App() {
           {/* Logo */}
           <div className="px-6 pt-8 pb-6 border-b border-gray-100">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-black text-xl italic"
-                style={{ background: "linear-gradient(135deg, #7B7DF5, #5B5EE8)" }}>B</div>
+              <BridgeLogo size={40} />
               <div>
                 <h1 className="text-gray-900 text-xl font-black tracking-tight leading-none">BRIDGE</h1>
                 <p className="text-gray-400 text-xs">브릿지 · 안산</p>
