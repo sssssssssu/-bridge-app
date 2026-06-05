@@ -293,6 +293,20 @@ export const START_BTN: Record<LangCode, string> = {
   km: "ចាប់ផ្តើម", ne: "सुरु गर्नुस्",
 };
 
+export const TO_MOBILE_VIEW: Record<LangCode, string> = {
+  ko:"모바일 뷰로 전환", en:"Switch to Mobile View", zh:"切换到手机视图", vi:"Chuyển sang chế độ di động",
+  mn:"Гар утасны харагдац руу шилжих", id:"Beralih ke Tampilan Mobile", ms:"Tukar ke Paparan Mudah Alih",
+  ru:"Переключить на мобильный вид", uz:"Mobil ko'rinishga o'tish", th:"เปลี่ยนเป็นมุมมองมือถือ",
+  fil:"Lumipat sa Mobile View", si:"ජංගම දර්ශනයට මාරු වන්න", km:"ប្តូរទៅទិដ្ឋភាពទូរស័ព្ទ", ne:"मोबाइल दृश्यमा जानुस्",
+};
+
+export const TO_PC_VIEW: Record<LangCode, string> = {
+  ko:"PC 뷰로 전환", en:"Switch to PC View", zh:"切换到电脑视图", vi:"Chuyển sang chế độ máy tính",
+  mn:"Компьютерийн харагдац руу шилжих", id:"Beralih ke Tampilan PC", ms:"Tukar ke Paparan PC",
+  ru:"Переключить на вид ПК", uz:"PC ko'rinishga o'tish", th:"เปลี่ยนเป็นมุมมอง PC",
+  fil:"Lumipat sa PC View", si:"PC දර්ශනයට මාරු වන්න", km:"ប្តូរទៅទិដ្ឋភាព PC", ne:"PC दृश्यमा जानुस्",
+};
+
 // 긴급 문장 4개 전 언어 번역
 export const EMERGENCY_PHRASES: {
   id: string;

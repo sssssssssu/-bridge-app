@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { LANGUAGES, type LangCode, t } from "@/lib/translations";
+import { LANGUAGES, type LangCode, t, TO_MOBILE_VIEW, TO_PC_VIEW } from "@/lib/translations";
 import { ViewContext } from "@/lib/viewContext";
 import { BridgeLogo } from "@/components/Icons";
 import LangPicker from "@/components/LangPicker";
@@ -146,7 +146,7 @@ export default function App() {
             <button onClick={() => setForceMobile(!forceMobile)}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50 transition-all">
               <span className="text-xl">📱</span>
-              <span className="text-sm font-semibold">{forceMobile ? "PC 뷰로 전환" : "모바일 뷰로 전환"}</span>
+              <span className="text-sm font-semibold">{forceMobile ? TO_PC_VIEW[lang] : TO_MOBILE_VIEW[lang]}</span>
             </button>
             <a href="tel:112" className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl text-white font-bold text-sm"
               style={{ backgroundColor: "#6C6EF0" }}>

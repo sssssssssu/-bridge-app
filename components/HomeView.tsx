@@ -1,6 +1,6 @@
 "use client";
 import { type View } from "@/app/page";
-import { type LangCode, t, SERVICE_DESC, SELECT_SERVICE } from "@/lib/translations";
+import { type LangCode, t, SERVICE_DESC, SELECT_SERVICE, TO_PC_VIEW } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
 import { GhostIcon, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
 
