@@ -95,19 +95,56 @@ export function AnsanIcon({ size = 28 }: { size?: number }) {
 }
 
 export function BridgeLogo({ size = 80 }: { size?: number }) {
+  const h = size * 1.18;
   return (
-    <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
-      {/* 말풍선 B 로고 */}
-      <rect width="80" height="80" rx="22" fill="rgba(255,255,255,0.2)" />
-      {/* B 글자 (말풍선 스타일) */}
-      <path d="M22 15H48C54 15 59 20 59 26C59 29 57.5 31.5 55 33C57.5 34.5 59 37 59 40C59 46 54 51 48 51H22V15Z"
-        fill="white" fillOpacity="0.9" />
+    <svg width={size} height={h} viewBox="0 0 100 118" fill="none">
+      <defs>
+        <linearGradient id="bGlass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.97)" />
+          <stop offset="60%" stopColor="rgba(235,237,255,0.88)" />
+          <stop offset="100%" stopColor="rgba(200,205,255,0.80)" />
+        </linearGradient>
+        <filter id="bShadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(80,80,200,0.18)" />
+        </filter>
+      </defs>
+
+      {/* 말풍선 B 외곽 */}
+      <path
+        d="M18 6
+           L56 6
+           Q76 6 76 24
+           Q76 34 64 39
+           Q80 44 80 60
+           Q80 82 56 82
+           L18 82
+           Q10 82 10 74
+           L10 14
+           Q10 6 18 6 Z"
+        fill="url(#bGlass)"
+        filter="url(#bShadow)"
+      />
+
       {/* 말풍선 꼬리 */}
-      <ellipse cx="26" cy="58" rx="5" ry="5" fill="white" fillOpacity="0.7" />
-      <ellipse cx="20" cy="65" rx="3" ry="3" fill="white" fillOpacity="0.5" />
-      {/* B 내부 곡선 */}
-      <path d="M30 23H46C49 23 52 25.5 52 28.5C52 31.5 49 34 46 34H30V23Z" fill="#6C6EF0" fillOpacity="0.3" />
-      <path d="M30 34H47C50.5 34 53 36.5 53 40C53 43.5 50.5 46 47 46H30V34Z" fill="#6C6EF0" fillOpacity="0.3" />
+      <circle cx="18" cy="93" r="6" fill="rgba(255,255,255,0.80)" />
+      <circle cx="13" cy="104" r="4" fill="rgba(255,255,255,0.55)" />
+
+      {/* B 위 구멍 (내부 컷아웃) */}
+      <path
+        d="M24 18 L52 18 Q64 18 64 28 Q64 39 52 39 L24 39 Z"
+        fill="rgba(100,108,240,0.13)"
+      />
+      {/* B 아래 구멍 */}
+      <path
+        d="M24 45 L54 45 Q68 45 68 58 Q68 71 54 71 L24 71 Z"
+        fill="rgba(100,108,240,0.13)"
+      />
+
+      {/* 하이라이트 (왼쪽 상단) */}
+      <path
+        d="M18 6 Q10 6 10 14 L10 35 Q20 20 36 16 Z"
+        fill="rgba(255,255,255,0.45)"
+      />
     </svg>
   );
 }

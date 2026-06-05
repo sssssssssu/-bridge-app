@@ -4,6 +4,7 @@ import { LANGUAGES, type LangCode, t } from "@/lib/translations";
 import { ViewContext } from "@/lib/viewContext";
 import { BridgeLogo } from "@/components/Icons";
 import LangPicker from "@/components/LangPicker";
+import { GREETINGS, START_BTN } from "@/lib/translations";
 import HomeView from "@/components/HomeView";
 import SafetyView from "@/components/SafetyView";
 import MedicalView from "@/components/MedicalView";
@@ -62,9 +63,9 @@ export default function App() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center max-w-md mx-auto"
         style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)" }}>
-        <div className="flex flex-col items-center gap-5">
-          <BridgeLogo size={100} />
-          <h1 className="text-white text-4xl font-black tracking-widest">BRIDGE</h1>
+        <div className="flex flex-col items-center gap-6">
+          <BridgeLogo size={110} />
+          <h1 className="text-white text-4xl font-black tracking-widest" style={{ letterSpacing: "0.15em" }}>BRIDGE</h1>
         </div>
       </div>
     );
@@ -72,28 +73,19 @@ export default function App() {
 
   // 언어 선택 (3D 드럼롤 피커)
   if (view === "lang") {
-    const greeting =
-      lang === "ko" ? "사용할 언어를\n선택해주세요." :
-      lang === "en" ? "Please select\nyour language." :
-      lang === "zh" ? "请选择您的语言。" :
-      lang === "vi" ? "Vui lòng chọn\nngôn ngữ của bạn." :
-      lang === "ru" ? "Пожалуйста, выберите\nваш язык." :
-      lang === "mn" ? "Хэлээ\nсонгоно уу." :
-      "사용할 언어를\n선택해주세요.";
+    const greeting = GREETINGS[lang] ?? GREETINGS.ko;
 
     return (
       <div className="min-h-screen flex flex-col max-w-md mx-auto bg-white">
         {/* 상단 헤더 */}
-        <div className="px-6 pt-14 pb-6">
+        <div className="px-6 pt-12 pb-4">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg, #7B7DF5, #5B5EE8)" }}>
-              <span className="text-white text-2xl font-black italic">B</span>
+            <div style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)", borderRadius: 16, padding: 8 }}>
+              <BridgeLogo size={40} />
             </div>
             <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 leading-snug whitespace-pre-line">
-            <span style={{ color: "#6C6EF0" }}>○○○</span>님, 환영해요!{"\n"}
             {greeting}
           </p>
         </div>
@@ -108,10 +100,7 @@ export default function App() {
           <button onClick={startApp}
             className="w-full py-4 rounded-full text-white font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
             style={{ backgroundColor: "#6C6EF0", boxShadow: "0 8px 24px rgba(108,110,240,0.35)" }}>
-            {lang === "ko" ? "시작하기" : lang === "en" ? "Get Started" :
-             lang === "zh" ? "开始" : lang === "vi" ? "Bắt đầu" :
-             lang === "ru" ? "Начать" : "시작하기"}
-            <span className="text-xl">›</span>
+            {START_BTN[lang]} <span className="text-xl">›</span>
           </button>
         </div>
       </div>

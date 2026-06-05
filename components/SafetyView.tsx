@@ -1,17 +1,12 @@
 "use client";
 import { useState } from "react";
 import { type View } from "@/app/page";
-import { type LangCode, t } from "@/lib/translations";
+import { type LangCode, t, getEmergencyPhrase } from "@/lib/translations";
 import PageLayout, { Card, CallButton, ExternalLink, SectionTitle } from "./PageLayout";
 
 interface Props { lang: LangCode; nav: (v: View) => void; }
 
-const PHRASES: Record<string, { ko: string; en: string }> = {
-  need_ambulance: { ko: "구급차가 필요합니다.", en: "I need an ambulance." },
-  fire: { ko: "불이 났습니다.", en: "There is a fire." },
-  assault: { ko: "폭행을 당하고 있습니다. 도와주세요.", en: "I am being assaulted. Please help me." },
-  accident: { ko: "교통사고가 났습니다.", en: "There has been a traffic accident." },
-};
+const PHRASE_IDS = ["need_ambulance", "fire", "assault", "accident"];
 
 function fireUrl(lang: LangCode) {
   return lang === 'ko'
@@ -94,20 +89,24 @@ export default function SafetyView({ lang, nav }: Props) {
       </Card>
 
       <SectionTitle>{t("emergencyPhrases", lang)}</SectionTitle>
-      {Object.entries(PHRASES).map(([id, phrase]) => (
-        <Card key={id}>
-          <div className="mb-2">
-            <p className="font-bold text-sm text-[#1a1a2e]">{phrase.en}</p>
-            <p className="text-gray-500 text-sm mt-0.5">{phrase.ko}</p>
-          </div>
-          <button
-            onClick={() => copy(phrase.en, id)}
-            className="w-full py-2 rounded-xl bg-[#f0f2f5] text-[#1a1a2e] font-semibold text-sm active:bg-[#e4e6e9]"
-          >
-            {copied === id ? `✓ ${t("copied", lang)}` : t("copy", lang)}
-          </button>
-        </Card>
-      ))}
+      {PHRASE_IDS.map((id) => {
+        const phrase = getEmergencyPhrase(id, lang);
+        return (
+          <Card key={id}>
+            <div className="mb-2">
+              <p className="font-bold text-sm" style={{ color: "#6C6EF0" }}>{phrase.native}</p>
+              {lang !== "ko" && <p className="text-gray-400 text-xs mt-1">{phrase.ko}</p>}
+            </div>
+            <button
+              onClick={() => copy(phrase.native, id)}
+              className="w-full py-2 rounded-xl text-sm font-semibold active:opacity-80"
+              style={{ background: "#EBEBFF", color: "#6C6EF0" }}
+            >
+              {copied === id ? `✓ ${t("copied", lang)}` : t("copy", lang)}
+            </button>
+          </Card>
+        );
+      })}
 
       <SectionTitle>{lang === "ko" ? "생활 안전 가이드" : "Safety Guide"}</SectionTitle>
       <Card>

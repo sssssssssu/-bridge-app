@@ -267,6 +267,227 @@ export function t(key: string, lang: LangCode): string {
   return UI[key]?.[lang] ?? UI[key]?.['en'] ?? key;
 }
 
+// 언어별 인사말
+export const GREETINGS: Record<LangCode, string> = {
+  ko: "○○○님, 환영해요!\n사용할 언어를\n선택해주세요.",
+  en: "Welcome, ○○○!\nPlease select\nyour language.",
+  zh: "○○○，欢迎您！\n请选择\n您使用的语言。",
+  vi: "Chào mừng ○○○!\nVui lòng chọn\nngôn ngữ của bạn.",
+  mn: "○○○, тавтай морил!\nХэлээ\nсонгоно уу.",
+  id: "Selamat datang, ○○○!\nSilakan pilih\nbahasa Anda.",
+  ms: "Selamat datang, ○○○!\nSila pilih\nbahasa anda.",
+  ru: "Добро пожаловать, ○○○!\nПожалуйста, выберите\nваш язык.",
+  uz: "Xush kelibsiz, ○○○!\nIltimos, tilingizni\ntanlang.",
+  th: "ยินดีต้อนรับ ○○○!\nกรุณาเลือก\nภาษาที่คุณใช้",
+  fil: "Maligayang pagdating, ○○○!\nMangyaring piliin\nang iyong wika.",
+  si: "○○○, සාදරයෙන් පිළිගනිමු!\nකරුණාකර ඔබේ\nභාෂාව තෝරන්න.",
+  km: "ស្វាគមន៍ ○○○!\nសូមជ្រើសរើស\nភាសារបស់អ្នក។",
+  ne: "○○○, स्वागत छ!\nकृपया आफ्नो\nभाषा छान्नुहोस्।",
+};
+
+// 시작하기 버튼 번역
+export const START_BTN: Record<LangCode, string> = {
+  ko: "시작하기", en: "Get Started", zh: "开始使用", vi: "Bắt đầu",
+  mn: "Эхлэх", id: "Mulai", ms: "Mula", ru: "Начать",
+  uz: "Boshlash", th: "เริ่มต้น", fil: "Magsimula", si: "ආරම්භ කරන්න",
+  km: "ចាប់ផ្តើម", ne: "सुरु गर्नुस्",
+};
+
+// 긴급 문장 4개 전 언어 번역
+export const EMERGENCY_PHRASES: {
+  id: string;
+  ko: string;
+  translations: Partial<Record<LangCode, string>>;
+}[] = [
+  {
+    id: "need_ambulance",
+    ko: "구급차가 필요합니다. 제 위치는 [위치]입니다.",
+    translations: {
+      en: "I need an ambulance. My location is [location].",
+      zh: "我需要救护车。我的位置是[位置]。",
+      vi: "Tôi cần xe cứu thương. Vị trí của tôi là [vị trí].",
+      mn: "Надад түргэн тусламжийн машин хэрэгтэй. Миний байршил [байршил].",
+      id: "Saya butuh ambulans. Lokasi saya di [lokasi].",
+      ms: "Saya memerlukan ambulans. Lokasi saya di [lokasi].",
+      ru: "Мне нужна скорая помощь. Моё местоположение: [местоположение].",
+      uz: "Menga tez yordam kerak. Mening joylashuvim [joylashuv].",
+      th: "ฉันต้องการรถพยาบาล ตำแหน่งของฉันคือ [ตำแหน่ง]",
+      fil: "Kailangan ko ng ambulansya. Ang aking lokasyon ay [lokasyon].",
+      si: "මට ගිලන් රථයක් අවශ්‍යයි. මගේ පිහිටීම [පිහිටීම].",
+      km: "ខ្ញុំត្រូវការរថយន្តសង្គ្រោះ។ ទីតាំងរបស់ខ្ញុំគឺ [ទីតាំង]។",
+      ne: "मलाई एम्बुलेन्स चाहिन्छ। मेरो स्थान [स्थान] हो।",
+    },
+  },
+  {
+    id: "fire",
+    ko: "불이 났습니다.",
+    translations: {
+      en: "There is a fire.",
+      zh: "发生火灾了。",
+      vi: "Có hỏa hoạn.",
+      mn: "Гал гарлаа.",
+      id: "Ada kebakaran.",
+      ms: "Ada kebakaran.",
+      ru: "Пожар!",
+      uz: "Yong'in chiqdi.",
+      th: "เกิดเพลิงไหม้",
+      fil: "May sunog.",
+      si: "ගිනි ගනී.",
+      km: "មានអណ្តាតភ្លើង។",
+      ne: "आगो लागेको छ।",
+    },
+  },
+  {
+    id: "assault",
+    ko: "폭행을 당하고 있습니다. 도와주세요.",
+    translations: {
+      en: "I am being assaulted. Please help me.",
+      zh: "我正在遭受袭击。请帮助我。",
+      vi: "Tôi đang bị tấn công. Xin hãy giúp tôi.",
+      mn: "Намайг довтолж байна. Туслаач.",
+      id: "Saya sedang diserang. Tolong bantu saya.",
+      ms: "Saya sedang diserang. Tolong bantu saya.",
+      ru: "На меня нападают. Пожалуйста, помогите.",
+      uz: "Menga hujum qilinmoqda. Iltimos, yordam bering.",
+      th: "ฉันกำลังถูกทำร้าย กรุณาช่วยด้วย",
+      fil: "Inaatake ako. Pakitulungan ako.",
+      si: "මට පහරදෙනවා. කරුණාකර මට උදව් කරන්න.",
+      km: "ខ្ញុំកំពុងត្រូវបានវាយប្រហារ។ សូមជួយខ្ញុំផង។",
+      ne: "मलाई आक्रमण गरिदैछ। कृपया मलाई मद्दत गर्नुस्।",
+    },
+  },
+  {
+    id: "accident",
+    ko: "교통사고가 났습니다.",
+    translations: {
+      en: "There has been a traffic accident.",
+      zh: "发生了交通事故。",
+      vi: "Đã xảy ra tai nạn giao thông.",
+      mn: "Замын осол гарлаа.",
+      id: "Telah terjadi kecelakaan lalu lintas.",
+      ms: "Telah berlaku kemalangan jalan raya.",
+      ru: "Произошла дорожно-транспортная авария.",
+      uz: "Yo'l-transport hodisasi yuz berdi.",
+      th: "เกิดอุบัติเหตุทางถนน",
+      fil: "Nagkaroon ng aksidente sa trapiko.",
+      si: "රථවාහන අනතුරක් සිදු විය.",
+      km: "មានគ្រោះថ្នាក់ចរាចរណ៍។",
+      ne: "यातायात दुर्घटना भयो।",
+    },
+  },
+];
+
+export function getEmergencyPhrase(phraseId: string, lang: LangCode): { native: string; ko: string } {
+  const phrase = EMERGENCY_PHRASES.find(p => p.id === phraseId);
+  if (!phrase) return { native: "", ko: "" };
+  return {
+    native: lang === 'ko' ? phrase.ko : (phrase.translations[lang] ?? phrase.translations.en ?? phrase.ko),
+    ko: phrase.ko,
+  };
+}
+
+// 홈 화면 서비스 설명 전 언어
+export const SERVICE_DESC: Record<string, Partial<Record<LangCode, string>>> = {
+  safety: {
+    ko: "미리 안전 사고를\n예방하고 대응해요.",
+    en: "Prevent and respond\nto safety accidents.",
+    zh: "预防和应对\n安全事故。",
+    vi: "Phòng ngừa và ứng\nphó tai nạn an toàn.",
+    mn: "Аюулгүй байдлын\nосолоос урьдчилан сэргийлэх.",
+    id: "Mencegah dan\nmerespons kecelakaan.",
+    ms: "Mencegah dan\nmenangani kemalangan.",
+    ru: "Предотвращение и\nреагирование на аварии.",
+    uz: "Xavfsizlik hodisalarini\noldini olish.",
+    th: "ป้องกันและรับมือ\nอุบัติเหตุด้านความปลอดภัย",
+    fil: "Pigilan at tugunan\nang mga aksidente.",
+    si: "ආරක්ෂිත අනතුරු\nවළක්වා ගන්න.",
+    km: "ការពារ​និង​ឆ្លើយ​តប\nគ្រោះថ្នាក់​សុវត្ថិភាព។",
+    ne: "सुरक्षा दुर्घटना\nरोक्नुस् र प्रतिक्रिया गर्नुस्।",
+  },
+  medical: {
+    ko: "병원, 응급 정보를\n제공해요.",
+    en: "Hospital and\nemergency info.",
+    zh: "提供医院和\n急救信息。",
+    vi: "Thông tin bệnh viện\nvà cấp cứu.",
+    mn: "Эмнэлэг, яаралтай\nтусламжийн мэдээлэл.",
+    id: "Info rumah sakit\ndan darurat.",
+    ms: "Maklumat hospital\ndan kecemasan.",
+    ru: "Информация о больнице\nи скорой помощи.",
+    uz: "Kasalxona va\nshoshilinch yordam.",
+    th: "ข้อมูลโรงพยาบาล\nและฉุกเฉิน",
+    fil: "Impormasyon sa\nospital at emergency.",
+    si: "රෝහල් සහ\nහදිසි තොරතුරු.",
+    km: "ព័ត៌មានមន្ទីរពេទ្យ\nនិងករណីបន្ទាន់។",
+    ne: "अस्पताल र\nआपतकालीन जानकारी।",
+  },
+  labor: {
+    ko: "근로자의 권리 정보를\n제공해요.",
+    en: "Worker rights\ninformation.",
+    zh: "提供劳工权利\n信息。",
+    vi: "Thông tin quyền\nlợi người lao động.",
+    mn: "Ажилчдын эрхийн\nмэдээлэл.",
+    id: "Informasi hak\npekerja.",
+    ms: "Maklumat hak\npekerja.",
+    ru: "Информация о правах\nработников.",
+    uz: "Ishchi huquqlari\nhaqida ma'lumot.",
+    th: "ข้อมูลสิทธิ์\nของแรงงาน",
+    fil: "Impormasyon sa\nkarapatan ng manggagawa.",
+    si: "කම්කරු අයිතිවාසිකම්\nතොරතුරු.",
+    km: "ព័ត៌មានសិទ្ធិ\nកម្មករ។",
+    ne: "श्रमिक अधिकार\nजानकारी।",
+  },
+  legal: {
+    ko: "법률과 관련해\n상담하고 지원해요.",
+    en: "Legal consultation\nand support.",
+    zh: "提供法律咨询\n和支持。",
+    vi: "Tư vấn và hỗ\ntrợ pháp lý.",
+    mn: "Хуулийн зөвлөгөө\nба дэмжлэг.",
+    id: "Konsultasi dan\ndukungan hukum.",
+    ms: "Perundingan dan\nsokongan undang-undang.",
+    ru: "Юридическая консультация\nи поддержка.",
+    uz: "Huquqiy maslahat\nva yordam.",
+    th: "ปรึกษาและสนับสนุน\nด้านกฎหมาย",
+    fil: "Legal na konsultasyon\nat suporta.",
+    si: "නීතිමය උපදෙස්\nසහ සහාය.",
+    km: "ការប្រឹក្សា​ច្បាប់\nនិង​ការ​គាំទ្រ។",
+    ne: "कानूनी परामर्श\nर सहयोग।",
+  },
+  industrial: {
+    ko: "산재 신청 및 보상에\n대한 정보를 제공해요.",
+    en: "Industrial accident\nclaims & compensation.",
+    zh: "提供工伤申请\n和赔偿信息。",
+    vi: "Thông tin bồi thường\ntai nạn lao động.",
+    mn: "Үйлдвэрийн ослын\ннэхэмжлэл, нөхөн олговор.",
+    id: "Info klaim kecelakaan\nkerja & kompensasi.",
+    ms: "Maklumat tuntutan\nkemalangan industri.",
+    ru: "Информация о\npроф. травме и компенсации.",
+    uz: "Ishlab chiqarish\nbaxtsizligi bo'yicha.",
+    th: "ข้อมูลการเรียกร้อง\nอุบัติเหตุจากการทำงาน",
+    fil: "Impormasyon sa industrial\naccident claims.",
+    si: "කාර්මික අනතුරු\nකොමිස් සහ වන්දි.",
+    km: "ព័ត៌មានការទាម​ទារ\nគ្រោះ​ថ្នាក់​ការ​ងារ។",
+    ne: "औद्योगिक दुर्घटना\nदाबी र क्षतिपूर्ति।",
+  },
+};
+
+// 홈 화면 서비스 선택 안내 문구
+export const SELECT_SERVICE: Record<LangCode, string> = {
+  ko: "필요한 서비스를\n선택하세요!",
+  en: "Select the service\nyou need!",
+  zh: "请选择您需要的\n服务！",
+  vi: "Chọn dịch vụ\nbạn cần!",
+  mn: "Хэрэгтэй үйлчилгээгээ\nсонгоно уу!",
+  id: "Pilih layanan\nyang Anda butuhkan!",
+  ms: "Pilih perkhidmatan\nyang anda perlukan!",
+  ru: "Выберите нужную\nвам услугу!",
+  uz: "Kerakli xizmatni\ntanlang!",
+  th: "เลือกบริการ\nที่คุณต้องการ!",
+  fil: "Piliin ang serbisyo\nna kailangan mo!",
+  si: "ඔබට අවශ්‍ය සේවාව\nතෝරන්න!",
+  km: "ជ្រើសរើស​សេវា​\nដែល​អ្នក​ត្រូវ​ការ!",
+  ne: "तपाईंलाई चाहिने\nसेवा छान्नुस्!",
+};
+
 export const GOOGLE_TRANSLATE_LANGS: Record<LangCode, string> = {
   ko: 'ko', en: 'en', zh: 'zh-CN', vi: 'vi', mn: 'mn', id: 'id', ms: 'ms',
   ru: 'ru', uz: 'uz', th: 'th', fil: 'tl', si: 'si', km: 'km', ne: 'ne',
