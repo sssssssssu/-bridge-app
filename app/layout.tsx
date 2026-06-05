@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "BRIDGE — 브릿지",
   description: "안산 외국인 주민을 위한 다국어 안전·권리 정보 앱",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/bridge-logo.png",
+    apple: "/bridge-logo.png",
+  },
 };
 
 export const viewport: Viewport = {
