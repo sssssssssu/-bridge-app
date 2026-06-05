@@ -2,7 +2,7 @@
 import { type View } from "@/app/page";
 import { type LangCode, t, SERVICE_DESC, SELECT_SERVICE, TO_PC_VIEW } from "@/lib/translations";
 import { useViewMode } from "@/lib/viewContext";
-import { BridgeLogoWhite, BridgeLogo, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
+import { GhostIcon, BridgeLogo, SafetyIcon, MedicalIcon, LaborIcon, LegalIcon, IndustrialIcon, AnsanIcon } from "@/components/Icons";
 
 interface Props {
   lang: LangCode;
@@ -91,8 +91,8 @@ export default function HomeView({ lang, nav, onChangeLang, onToggleView }: Prop
 
         {/* 마스코트 + 타이틀 */}
         <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
-            <BridgeLogoWhite size={60} />
+          <div className="w-16 h-16 flex-shrink-0">
+            <GhostIcon size={64} />
           </div>
           <div>
             <h1 className="text-white text-xl font-black leading-tight whitespace-pre-line">

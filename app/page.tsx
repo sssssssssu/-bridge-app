@@ -80,7 +80,8 @@ export default function App() {
         {/* 상단 헤더 */}
         <div className="px-6 pt-12 pb-4">
           <div className="flex items-center gap-3 mb-6">
-            <BridgeLogo size={44} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/BridgeLogoWhite.png" alt="BRIDGE" width={44} height={44} style={{ objectFit: "contain" }} />
             <span className="text-2xl font-black text-gray-900 tracking-widest">BRIDGE</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 leading-snug whitespace-pre-line">
