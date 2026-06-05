@@ -95,56 +95,14 @@ export function AnsanIcon({ size = 28 }: { size?: number }) {
 }
 
 export function BridgeLogo({ size = 80 }: { size?: number }) {
-  const h = size * 1.18;
   return (
-    <svg width={size} height={h} viewBox="0 0 100 118" fill="none">
-      <defs>
-        <linearGradient id="bGlass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.97)" />
-          <stop offset="60%" stopColor="rgba(235,237,255,0.88)" />
-          <stop offset="100%" stopColor="rgba(200,205,255,0.80)" />
-        </linearGradient>
-        <filter id="bShadow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(80,80,200,0.18)" />
-        </filter>
-      </defs>
-
-      {/* 말풍선 B 외곽 */}
-      <path
-        d="M18 6
-           L56 6
-           Q76 6 76 24
-           Q76 34 64 39
-           Q80 44 80 60
-           Q80 82 56 82
-           L18 82
-           Q10 82 10 74
-           L10 14
-           Q10 6 18 6 Z"
-        fill="url(#bGlass)"
-        filter="url(#bShadow)"
-      />
-
-      {/* 말풍선 꼬리 */}
-      <circle cx="18" cy="93" r="6" fill="rgba(255,255,255,0.80)" />
-      <circle cx="13" cy="104" r="4" fill="rgba(255,255,255,0.55)" />
-
-      {/* B 위 구멍 (내부 컷아웃) */}
-      <path
-        d="M24 18 L52 18 Q64 18 64 28 Q64 39 52 39 L24 39 Z"
-        fill="rgba(100,108,240,0.13)"
-      />
-      {/* B 아래 구멍 */}
-      <path
-        d="M24 45 L54 45 Q68 45 68 58 Q68 71 54 71 L24 71 Z"
-        fill="rgba(100,108,240,0.13)"
-      />
-
-      {/* 하이라이트 (왼쪽 상단) */}
-      <path
-        d="M18 6 Q10 6 10 14 L10 35 Q20 20 36 16 Z"
-        fill="rgba(255,255,255,0.45)"
-      />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/bridge-logo.png"
+      alt="BRIDGE logo"
+      width={size}
+      height={size}
+      style={{ objectFit: "contain" }}
+    />
   );
 }
