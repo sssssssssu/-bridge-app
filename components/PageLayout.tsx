@@ -15,31 +15,31 @@ interface Props {
 export default function PageLayout({ title, icon, color, lang, nav, children }: Props) {
   const { forceMobile } = useViewMode();
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f2f5]">
-      <div className="sticky top-0 z-30 px-4 pt-4 pb-3" style={{ background: color }}>
+    <div className="min-h-screen flex flex-col" style={{ background: "#F2F3F8" }}>
+      {/* 헤더 */}
+      <div className="sticky top-0 z-30 px-5 pt-5 pb-4 rounded-b-3xl" style={{ background: "linear-gradient(160deg, #7B7DF5 0%, #5B5EE8 100%)" }}>
         <div className="flex items-center gap-3">
-          {/* 사이드바 없을 때(모바일 or forceMobile) 뒤로가기 버튼 표시 */}
           <button
             onClick={() => nav("home")}
-            className={`${!forceMobile ? "md:hidden" : ""} w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-xl flex-shrink-0`}
+            className={`${!forceMobile ? "md:hidden" : ""} w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-bold flex-shrink-0`}
           >
-            ←
+            ‹
           </button>
           <div className="flex items-center gap-2 flex-1 min-w-0">
-            <span className="text-2xl">{icon}</span>
-            <h1 className="text-white text-xl font-black truncate">{title}</h1>
+            <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-xl flex-shrink-0">{icon}</div>
+            <h1 className="text-white text-lg font-black truncate">{title}</h1>
           </div>
         </div>
       </div>
 
-      {/* 사이드바 없을 때 긴급 플로팅 버튼 */}
+      {/* 긴급 플로팅 버튼 */}
       <a
         href="tel:112"
-        className={`${!forceMobile ? "md:hidden" : ""} fixed bottom-6 right-4 z-50 bg-[#e63946] text-white rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 font-bold text-sm`}
-        style={{ boxShadow: "0 4px 24px rgba(230,57,70,0.5)" }}
+        className={`${!forceMobile ? "md:hidden" : ""} fixed bottom-6 right-4 z-50 text-white rounded-2xl px-4 py-3 flex items-center gap-2 font-bold text-sm`}
+        style={{ backgroundColor: "#6C6EF0", boxShadow: "0 8px 24px rgba(108,110,240,0.45)" }}
       >
-        <span className="text-base">🚨</span>
-        {t("emergency", lang)}
+        <span>🚨</span>
+        {t("emergency", lang)} 112
       </a>
 
       <div className="flex-1 px-4 pt-4 pb-28 space-y-3">
